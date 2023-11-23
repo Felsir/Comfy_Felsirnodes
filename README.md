@@ -24,12 +24,22 @@ Normal scaling between aspects either distorts the image or crops the image unin
 ## Focalpoint from SEGS Node
 This node determines the focalpoint based on SEGS input by averaging the centerpoints of each detected node.
 
-## Example
+### Example
 The source image is fed into a face detection node, the output of this node is used to create a new image and :
 ![Detecting focal point from image with faces](https://github.com/Felsir/Comfy_Felsirnodes/blob/main/examples/focalpoint-segsaverage.png)
 
-## Intended use
+### Intended use
 By detecting the face and feeding this in the focalpoint rescale node, you can automatically detect the focalpoint and generate images in the aspect ratios of your choice.
+
+## Rescale Maintain Aspect Node
+This node rescales an image while keeping the source node aspect ratio in tact. It finds the maximum size for the source image within the new width/height and fills the empty space with either black or white.
+
+### Example
+The source controlnet image is rescaled to match the intended imagesize. In order to keep the proportions the node is used. The stick figure is aligned to the bottom, any space is filled in with a black color:
+![Rescaling a image filling the remaining area black](https://github.com/Felsir/Comfy_Felsirnodes/blob/main/examples/rescalemaintainaspect.png)
+
+### Intended use
+Often a rescale means distortion of the source material. This node works great for depthmaps or controlnet nodes by keeping the aspect ratio of the source and fitting it as best as possible in the new space.
 
 ## Latent Aspect Node
 This node outputs the ratio, width and height for a given model (SD1.5 or SDXL) as in the following table:
