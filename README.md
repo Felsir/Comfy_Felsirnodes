@@ -1,9 +1,35 @@
 # Comfy_Felsirnodes
 
 My set of custom nodes for **Comfyui** interface mainly for interacting with images and image sizes.
+Note; these nodes do not use Stable Diffusion for imagescaling, but regular scaling. This is intended as pre- or post processing of images.
 
 ## Focalpoint Rescale
-This node rescales the input image while keeping a focal point inside the image. The aspect ratio of the image contents is not changed. 
+This node rescales the input image in a new width/height, while keeping a focal point inside the image. The aspect ratio of the image contents is not changed. 
+The process is as follows; the target aspect ratio is determined based on the new width and height- next the maximum rectangle is determined to fit inside the original image with the found aspect ratio. 
+Next the rectangle is moved to have the focalpoint in the center. If that pushes the edges of the rectangle outside of the image bounds, the rectangle is moved inside the image.
+Finally that rectangle is cropped and scaled to the new width and height.
+
+### Examples
+Scale the image, while keeping the moon inside the frame. The moon is located at 600,100 in the original image.
+
+Scale the image to a new size of 800x200:
+![Horzontal focal point rescale](https://github.com/Felsir/Comfy_Felsirnodes/blob/main/examples/focalpoint-horizontal.png)
+
+Scale the image to a new size of 512x768: 
+![Vertcial focal point rescale](https://github.com/Felsir/Comfy_Felsirnodes/blob/main/examples/focalpoint-vertical.png)
+
+### Intended use
+Normal scaling between aspects either distorts the image or crops the image unintentionally. The focal point method provides an easy way to control the cropping and getting the maximum out of the source image.
+
+## Focalpoint from SEGS Node
+This node determines the focalpoint based on SEGS input by averaging the centerpoints of each detected node.
+
+## Example
+The source image is fed into a face detection node, the output of this node is used to create a new image and :
+![Detecting focal point from image with faces](https://github.com/Felsir/Comfy_Felsirnodes/blob/main/examples/focalpoint-segsaverage.png)
+
+## Intended use
+By detecting the face and feeding this in the focalpoint rescale node, you can automatically detect the focalpoint and generate images in the aspect ratios of your choice.
 
 ## Latent Aspect Node
 This node outputs the ratio, width and height for a given model (SD1.5 or SDXL) as in the following table:
@@ -18,13 +44,18 @@ This node outputs the ratio, width and height for a given model (SD1.5 or SDXL) 
 |Widescreen|16:9|910x512|1344x768|
 |Cinematic|21:9|1195x512|1536x640|
 
-### intended use
+### Intended use
 Use this as a source for a empty latent or scale latent node width and height. Ofcourse anything else that wold need a width or height could benefit from this node. Set this as the 'base value' for other nodes to use.
 
 ## Aspect Ratio Node
 This node reads the aspect from a image input, then finds the nearest match for a SD15 or SDXL latent. The aspects chosen will be one from the table as in the Latent Aspect Node above.
 
-### intended use
+### Example
+Create a latent for SDXL with the aspect close to the source image:
+![Aspect from image](https://github.com/Felsir/Comfy_Felsirnodes/blob/main/examples/aspectrationfromimage.png)
+The endresult will be a latent that utilizes the maximum usable area.
+
+### Intended use
 This enables you to pick a latent that is closest to the source image. Useful for creating a new latent where you want to reuse components from a source image.
 
 
