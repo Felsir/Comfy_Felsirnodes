@@ -18,6 +18,9 @@ Note; these nodes do not use Stable Diffusion for imagescaling, but regular imag
 
 This command clones the repository into your `ComfyUI/custom_nodes/` directory. You should now be able to access and use the nodes from this repository.
 
+## Use
+You can find the nodes under the `Add Node` submenu `Felsir`. *This might change in the future, to have the nodes (likely) under the image submenu.* 
+
 ## Focalpoint Rescale
 This node rescales the input image in a new width/height, while keeping a focal point inside the image. The aspect ratio of the image contents is not changed. 
 The process is as follows; the target aspect ratio is determined based on the new width and height- next the maximum rectangle is determined to fit inside the original image with the found aspect ratio. 
