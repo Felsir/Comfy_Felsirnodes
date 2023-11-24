@@ -1,7 +1,22 @@
 # Comfy_Felsirnodes
 
 My set of custom nodes for **Comfyui** interface mainly for interacting with images and image sizes.
-Note; these nodes do not use Stable Diffusion for imagescaling, but regular scaling. This is intended as pre- or post processing of images.
+
+1. A set of nodes to create base latent spaces with the max dimensions for SD15 and SDXL.
+2. A set of nodes for cropping and resizing images with the best aspect ratios
+3. Focal point rescaling using SEGS data to determine the best focal point.
+
+Note; these nodes do not use Stable Diffusion for imagescaling, but regular image scaling. This is intended as pre- or post processing of images.
+
+## Installation
+
+1. Open a terminal or command line interface.
+2. Navigate to the `ComfyUI/custom_nodes/` directory.
+3. Run the following command:
+```git clone https://github.com/Felsir/Comfy_Felsirnodes.git```
+4. Restart ComfyUI.
+
+This command clones the repository into your `ComfyUI/custom_nodes/` directory. You should now be able to access and use the nodes from this repository.
 
 ## Focalpoint Rescale
 This node rescales the input image in a new width/height, while keeping a focal point inside the image. The aspect ratio of the image contents is not changed. 
