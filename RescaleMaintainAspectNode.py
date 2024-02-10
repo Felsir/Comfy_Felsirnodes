@@ -12,7 +12,7 @@ class RescaleMaintainAspectNode:
                 "height": ("INT",{"default": 512, "min": 16, "max": 2048, "step": 1}),
                 "halign" : (["center", "left", "right"],),
                 "valign" : (["center", "top", "bottom"],),
-                "fillcolor" : (["black", "white"],),
+                "fillcolor" : (["black", "white", "transparent"],),
                 },
         }
 
@@ -26,15 +26,15 @@ class RescaleMaintainAspectNode:
         tensors = []
         if len(image_in) > 1:
             for img in image_in:
-                tensors.append(pil2tensor(focalrecaleimage(tensor2pil(img), width,height,halign,valign,fillcolor)))
+                tensors.append(pil2tensor(recaleimage(tensor2pil(img), width,height,halign,valign,fillcolor)))
             tensors = torch.cat(tensors, dim=0)
         else:
-            return (pil2tensor(focalrecaleimage(tensor2pil(image_in), width,height,halign,valign,fillcolor)),)
+            return (pil2tensor(recaleimage(tensor2pil(image_in), width,height,halign,valign,fillcolor)),)
            
         return (tensors,)
 
 
-def focalrecaleimage(original_image,new_width,new_height,h_alignment,v_alignment,fillcolor):
+def recaleimage(original_image,new_width,new_height,h_alignment,v_alignment,fillcolor):
 
     # Calculate the new dimensions while maintaining the aspect ratio
     aspect_ratio = original_image.width / original_image.height
@@ -60,6 +60,8 @@ def focalrecaleimage(original_image,new_width,new_height,h_alignment,v_alignment
     # Create a new image with the specified dimensions
     if fillcolor=="black":
         result_image = Image.new("RGB", (new_width, new_height), (0, 0, 0))
+    elif fillcolor=="transparent":
+        result_image = Image.new("RGBA", (new_width, new_height), (0, 0, 0,255))
     else:
         result_image = Image.new("RGB", (new_width, new_height), (255, 255, 255))
 
