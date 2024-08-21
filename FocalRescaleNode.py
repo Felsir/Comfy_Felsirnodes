@@ -26,11 +26,11 @@ class FocalRescaleNode:
         tensors = []
         if len(image_in) > 1:
             for img in image_in:
-                image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly,coverage,fit_inside)
+                image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly)
                 tensors.append(pil2tensor(image,),x,y,w,h)
             tensors = torch.cat(tensors, dim=0)
         else:
-            image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly,coverage,fit_inside)
+            image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly)
             return (pil2tensor(image,),x,y,w,h)
            
         return (tensors,)
