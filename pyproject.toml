@@ -1,5 +1,5 @@
 [project]
-name = "comfy_felsirnodes"
+name = "felsir-cropping"
 description = "Utility nodes for interacting with images and image sizes"
 version = "1.0.0"
 license = {file = "LICENSE"}
@@ -10,5 +10,5 @@ Repository = "https://github.com/KaruroChori/Comfy_Felsirnodes"
 
 [tool.comfy]
 PublisherId = "karurochari-0"
-DisplayName = "Comfy_Felsirnodes"
+DisplayName = "felsir-cropping"
 Icon = ""
