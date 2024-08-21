@@ -1,18 +1,18 @@
 from .AspectRatioNode import *
 from .LatentAspectRatioNode import *
 from .FocalRescaleNode import *
-from .FocalRescaleNodeRel import *
+from .FocalRescaleRelNode import *
 from .RescaleMaintainAspectNode import *
 from .FocalPointFromSegsNode import *
-from .MaskToCrop import *
+from .MaskToCropNode import *
 
 NODE_CLASS_MAPPINGS = { "Aspect from Image" : AspectRatioNode,
                        "Latent Aspect": LatentAspectRatioNode, 
                        "Focal Rescale": FocalRescaleNode,
-                       "Focal Rescale Rel": FocalRescaleNodeRel,
+                       "Focal Rescale Rel": FocalRescaleRelNode,
                        "Rescale Maintain Aspect": RescaleMaintainAspectNode,
                        "Focalpoint from SEGS" : FocalPointFromSegsNode, 
-                       "Mask to Crop": MaskToCrop}
+                       "Mask to Crop": MaskToCropNode}
 
 NODE_DISPLAY_NAME_MAPPINGS = { "Aspect from Image" : "AspectRatio",
                                "Aspect for Latent" : "LatentAspectRatio",

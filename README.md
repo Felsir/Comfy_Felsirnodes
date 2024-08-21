@@ -60,6 +60,9 @@ The source image is fed into a face detection node, the output of this node is u
 ### Intended use
 By detecting the face and feeding this in the focalpoint rescale node, you can automatically detect the focalpoint and generate images in the aspect ratios of your choice.
 
+## Mask to Crop
+Use the mask information of an image to crop the relevant portion of space from the original image.
+
 ## Rescale Maintain Aspect Node
 This node rescales an image while keeping the source node aspect ratio in tact. It finds the maximum size for the source image within the new width/height and fills the empty space with either black or white.
 

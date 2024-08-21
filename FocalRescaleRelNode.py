@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import math
 
-class FocalRescaleNodeRel:
+class FocalRescaleRelNode:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -11,8 +11,8 @@ class FocalRescaleNodeRel:
                 "image_in" : ("IMAGE", {}), 
                 "width": ("INT",{"default": 512, "min": 16, "max": 2048, "step": 1}),
                 "height": ("INT",{"default": 512, "min": 16, "max": 2048, "step": 1}),
-                "focalx": ("FLOAT",{"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
-                "focaly": ("FLOAT",{"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                "focal_x": ("FLOAT",{"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
+                "focal_y": ("FLOAT",{"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
                 "coverage": ("FLOAT",{"default": 0.5, "min": 0, "max": 1, "step": 0.05}),
                 "fit_inside": ("BOOLEAN",{"default": False}),
                 },
@@ -24,22 +24,22 @@ class FocalRescaleNodeRel:
     FUNCTION = "focalrescalerel"
     CATEGORY = "Felsir"
 
-    def focalrescalerel(self, image_in,width,height,focalx,focaly,coverage,fit_inside):      
+    def focalrescalerel(self, image_in,width,height,focal_x,focal_y,coverage,fit_inside):      
 
         tensors = []
         if len(image_in) > 1:
             for img in image_in:
-                image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly,coverage,fit_inside)
+                image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focal_x,focal_y,coverage,fit_inside)
                 tensors.append(pil2tensor(image,),x,y,w,h)
             tensors = torch.cat(tensors, dim=0)
         else:
-            image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly,coverage,fit_inside)
+            image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focal_x,focal_y,coverage,fit_inside)
             return (pil2tensor(image,),x,y,w,h)
            
         return (tensors,)
 
 
-def focalrecaleimage(original_image,new_width,new_height,focalx,focaly,coverage,fit_inside):
+def focalrecaleimage(original_image,new_width,new_height,focal_x,focal_y,coverage,fit_inside):
 
 
     # Get the size of the original image
@@ -61,8 +61,8 @@ def focalrecaleimage(original_image,new_width,new_height,focalx,focaly,coverage,
         rect_height = coverage*image_width/target_aspect_ratio
 
     # Position the rectangle to have the focalpoint in the center
-    rect_left = focalx*image_width - rect_width//2
-    rect_top = focaly*image_height - rect_height//2
+    rect_left = focal_x*image_width - rect_width//2
+    rect_top = focal_y*image_height - rect_height//2
     rect_right = rect_left+rect_width
     rect_bottom = rect_top+rect_height
 
