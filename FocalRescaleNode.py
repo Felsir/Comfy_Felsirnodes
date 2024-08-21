@@ -10,8 +10,8 @@ class FocalRescaleNode:
                 "image_in" : ("IMAGE", {}), 
                 "width": ("INT",{"default": 512, "min": 16, "max": 2048, "step": 1}),
                 "height": ("INT",{"default": 512, "min": 16, "max": 2048, "step": 1}),
-                "focalx": ("INT",{"default": 256, "min": 16, "max": 2048, "step": 1}),
-                "focaly": ("INT",{"default": 256, "min": 16, "max": 2048, "step": 1}),
+                "focalx": ("INT",{"default": 256, "step": 1}),
+                "focaly": ("INT",{"default": 256, "step": 1}),
                 },
         }
 
