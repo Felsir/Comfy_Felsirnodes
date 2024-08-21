@@ -15,20 +15,23 @@ class FocalRescaleNode:
                 },
         }
 
-    RETURN_TYPES = ("IMAGE",)
+    RETURN_TYPES = ("IMAGE","INT","INT","INT","INT")
+    RETURN_NAMES = ("IMAGE","rect_left","rect_top","rect_width","rect_height")
 
     FUNCTION = "focalrescale"
     CATEGORY = "Felsir"
 
-    def focalrescale(self, image_in,width,height,focalx,focaly):      
+    def focalrescale(self, image_in,width,height,focalx,focaly,coverage,fit_inside):      
 
         tensors = []
         if len(image_in) > 1:
             for img in image_in:
-                tensors.append(pil2tensor(focalrecaleimage(tensor2pil(img), width,height,focalx,focaly)))
+                image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly,coverage,fit_inside)
+                tensors.append(pil2tensor(image,),x,y,w,h)
             tensors = torch.cat(tensors, dim=0)
         else:
-            return (pil2tensor(focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly)),)
+            image, x,y, w, h = focalrecaleimage(tensor2pil(image_in), width,height,focalx,focaly,coverage,fit_inside)
+            return (pil2tensor(image,),x,y,w,h)
            
         return (tensors,)
 
@@ -93,7 +96,7 @@ def focalrecaleimage(original_image,new_width,new_height,focalx,focaly):
     # Resize the cropped image to the new size
     resized_image = cropped_image.resize(size=(new_width,new_height))
 
-    return resized_image
+    return (resized_image, rect_left, rect_top, rect_width, rect_height,)    
 
 
 def focalrecaleimage2(original_image,width,height,focalx,focaly):
