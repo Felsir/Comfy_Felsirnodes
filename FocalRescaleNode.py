@@ -21,7 +21,7 @@ class FocalRescaleNode:
     FUNCTION = "focalrescale"
     CATEGORY = "Felsir"
 
-    def focalrescale(self, image_in,width,height,focalx,focaly,coverage,fit_inside):      
+    def focalrescale(self, image_in,width,height,focalx,focaly):      
 
         tensors = []
         if len(image_in) > 1:
