@@ -53,12 +53,12 @@ def focalrecaleimage(original_image,new_width,new_height,focalx,focaly,coverage,
     #)
     
     if image_height < image_width:
-        rect_width = coverage*image_height
+        rect_width = coverage*image_height*target_aspect_ratio
         rect_height = coverage*image_height
 
     if image_height >= image_width:
         rect_width = coverage*image_width
-        rect_height = coverage*image_width
+        rect_height = coverage*image_width/target_aspect_ratio
 
     # Position the rectangle to have the focalpoint in the center
     rect_left = focalx*image_width - rect_width//2

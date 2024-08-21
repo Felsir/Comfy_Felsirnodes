@@ -1,6 +1,7 @@
 import torch
 import numpy as np
 from PIL import Image
+import math
 
 class MaskToCrop:
     @classmethod
@@ -14,7 +15,7 @@ class MaskToCrop:
     RETURN_TYPES = ("FLOAT","FLOAT","FLOAT")
     RETURN_NAMES = ("focal_x","focal_y","coverage")
 
-    FUNCTION = "maktocrop"
+    FUNCTION = "masktocrop"
     CATEGORY = "Felsir"
 
     def masktocrop(self, mask_in):      
@@ -31,7 +32,14 @@ class MaskToCrop:
 
 
 def op(mask_in):
-    return (0,0,0)
+    width = mask_in.shape[2]
+    height = mask_in.shape[1]
+    center = [ np.average(indices) for indices in np.where(mask_in >= 0.5   ) ]
+    variance = [ np.var(indices) for indices in np.where(mask_in >= 0.5   ) ]
+    varx = math.sqrt(variance[2]/width/width)
+    vary = math.sqrt(variance[1]/height/height)
+    # Use the variance to determine an approximation of the zoom level needed.
+    return (center[2]/width,center[1]/height,min(1,2*max(varx,vary)*max(width/height,height/width)))
     
 
 # Tensor to PIL
