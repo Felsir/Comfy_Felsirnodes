@@ -39,6 +39,17 @@ Scale the image to a new size of 512x768:
 ### Intended use
 Normal scaling between aspects either distorts the image or crops the image unintentionally. The focal point method provides an easy way to control the cropping and getting the maximum out of the source image.
 
+## Focalpoint Rescale Relative
+This node crop a rectangular sub-window in the target image, ensuring the generated image has a fixed height and width.  
+It is possible to specify via `fit_inside` what to do in case the sub-window is not fully covered by the original image.  
+
+The coordinates of the focal point are specified relative to height and width.  
+Coverage determines the radius of the circle built around the rectangular sub-window. Its scale is either the height or the width of the original image, whichever is smaller.
+
+### Intended use
+This node can be used standalone as an alternative to `Focalpoint Rescale` with more control over the cropping process.  
+It is also meant to work alongside `MaskToCrop` to perform batch cropping automatically.
+
 ## Focalpoint from SEGS Node
 This node determines the focalpoint based on SEGS input by averaging the centerpoints of each detected node.
 
@@ -48,6 +59,9 @@ The source image is fed into a face detection node, the output of this node is u
 
 ### Intended use
 By detecting the face and feeding this in the focalpoint rescale node, you can automatically detect the focalpoint and generate images in the aspect ratios of your choice.
+
+## Mask to Crop
+Use the mask information of an image to crop the relevant portion of space from the original image.
 
 ## Rescale Maintain Aspect Node
 This node rescales an image while keeping the source node aspect ratio in tact. It finds the maximum size for the source image within the new width/height and fills the empty space with either black or white.
