@@ -11,4 +11,3 @@ Repository = "https://github.com/Felsir/Comfy_Felsirnodes"
 [tool.comfy]
 PublisherId = "felsir"
 DisplayName = "felsir-image-tools"
-Icon = ""
