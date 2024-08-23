@@ -1,5 +1,5 @@
 [project]
-name = "felsir-image-tools"
+name = "Comfy_Felsirnodes"
 description = "Utility nodes for interacting with images and image sizes"
 version = "1.1.0"
 license = {file = "LICENSE"}
@@ -10,4 +10,4 @@ Repository = "https://github.com/Felsir/Comfy_Felsirnodes"
 
 [tool.comfy]
 PublisherId = "felsir"
-DisplayName = "felsir-image-tools"
+DisplayName = "Felsir-image-tools"
