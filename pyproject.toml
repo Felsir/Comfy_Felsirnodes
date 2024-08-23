@@ -1,14 +1,14 @@
 [project]
 name = "felsir-image-tools"
 description = "Utility nodes for interacting with images and image sizes"
-version = "1.2.0"
+version = "1.1.0"
 license = {file = "LICENSE"}
 
 [project.urls]
-Repository = "https://github.com/KaruroChori/Comfy_Felsirnodes"
+Repository = "https://github.com/Felsir/Comfy_Felsirnodes"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = "karurochari"
+PublisherId = "felsir"
 DisplayName = "felsir-image-tools"
 Icon = ""
