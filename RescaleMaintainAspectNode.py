@@ -61,7 +61,7 @@ def recaleimage(original_image,new_width,new_height,h_alignment,v_alignment,fill
     if fillcolor=="black":
         result_image = Image.new("RGB", (new_width, new_height), (0, 0, 0))
     elif fillcolor=="transparent":
-        result_image = Image.new("RGBA", (new_width, new_height), (0, 0, 0,255))
+        result_image = Image.new("RGBA", (new_width, new_height), (0, 0, 0, 0))
     else:
         result_image = Image.new("RGB", (new_width, new_height), (255, 255, 255))
 
