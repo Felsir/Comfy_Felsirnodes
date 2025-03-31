@@ -1,7 +1,7 @@
 [project]
 name = "comfy_felsirnodes"
 description = "Utility nodes for interacting with images and image sizes"
-version = "1.1.0"
+version = "1.1.1"
 license = {file = "LICENSE"}
 
 [project.urls]
